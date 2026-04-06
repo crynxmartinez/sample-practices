@@ -1,7 +1,11 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 export default function YFLForm() {
   const [activeTab, setActiveTab] = useState<'family' | 'youth'>('family')
+
+  useEffect(() => {
+    document.title = 'YFL Form - Youth & Family Life Registration'
+  }, [])
 
   return (
     <div className="min-h-screen bg-[#F5F1ED]">
