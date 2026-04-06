@@ -1,363 +1,388 @@
-import { motion } from 'framer-motion'
-import { Link } from 'react-router-dom'
-import { ArrowLeft, Sparkles } from 'lucide-react'
-import { useForm } from 'react-hook-form'
 import { useState } from 'react'
 
-interface FormData {
-  parentName: string
-  parentPhone: string
-  parentEmail: string
-  emergencyContactName: string
-  emergencyContactNumber: string
-  firstTimeVisitor: boolean
-  attendingRegularly: boolean
-  lookingForCommunity: boolean
-  exploringFaith: boolean
-  friendInvited: boolean
-  medicalConditions: string
-  allergies: string
-  medications: string
-  liabilityConsent: boolean
-  photoConsent: boolean
-  communicationConsent: boolean
-}
-
 export default function YFLForm() {
-  const { register, handleSubmit, formState: { errors } } = useForm<FormData>()
-  const [submitted, setSubmitted] = useState(false)
-
-  const onSubmit = (data: FormData) => {
-    console.log('Form submitted:', data)
-    setSubmitted(true)
-  }
-
-  if (submitted) {
-    return (
-      <div className="min-h-screen bg-cream-100 flex items-center justify-center px-4">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          className="bg-cream-50 rounded-2xl shadow-xl p-12 max-w-2xl text-center border border-gray-200"
-        >
-          <div className="w-20 h-20 bg-coral-100 rounded-full flex items-center justify-center mx-auto mb-6">
-            <Sparkles className="w-10 h-10 text-coral-300" />
-          </div>
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">Thank You!</h2>
-          <p className="text-xl text-gray-600 mb-8">
-            Your registration has been submitted successfully.
-          </p>
-          <Link
-            to="/"
-            className="inline-flex items-center px-6 py-3 bg-coral-300 text-white rounded-full hover:bg-coral-200 transition-colors"
-          >
-            <ArrowLeft className="w-5 h-5 mr-2" />
-            Back to Dashboard
-          </Link>
-        </motion.div>
-      </div>
-    )
-  }
+  const [activeTab, setActiveTab] = useState<'family' | 'youth'>('family')
 
   return (
-    <div className="min-h-screen bg-cream-100 py-12 px-4">
-      <div className="max-w-3xl mx-auto">
-        <Link
-          to="/"
-          className="inline-flex items-center text-gray-600 hover:text-gray-800 mb-8 transition-colors"
-        >
-          <ArrowLeft className="w-5 h-5 mr-2" />
-          Back to Dashboard
-        </Link>
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-        >
-          <div className="bg-cream-50 rounded-3xl shadow-lg overflow-hidden border border-gray-200">
-            <div className="bg-cream-50 py-12 text-center">
-              <img
-                src="/hd-logo.png"
-                alt="Youth & Family Life"
-                className="h-40 mx-auto"
-              />
+    <div className="min-h-screen bg-[#F5F1ED]">
+      <div className="max-w-7xl mx-auto px-4 py-8">
+        {/* Main Form Container */}
+        <div className="bg-white rounded-lg shadow-sm overflow-hidden">
+          {/* Tab Navigation */}
+          <div className="flex border-b border-gray-200">
+            <button
+              onClick={() => setActiveTab('family')}
+              className={`flex-1 flex items-center justify-center gap-3 px-6 py-4 text-sm font-medium transition-colors ${
+                activeTab === 'family'
+                  ? 'text-[#B8856A] border-b-2 border-[#B8856A] bg-white'
+                  : 'text-gray-500 hover:text-gray-700 bg-gray-50'
+              }`}
+            >
+              <span className={`flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${
+                activeTab === 'family' ? 'bg-[#B8856A] text-white' : 'bg-gray-300 text-gray-600'
+              }`}>
+                1
+              </span>
+              FAMILY REGISTRATION
+            </button>
+            <div
+              className={`flex-1 flex items-center justify-center gap-3 px-6 py-4 text-sm font-medium ${
+                activeTab === 'youth'
+                  ? 'text-[#B8856A] border-b-2 border-[#B8856A] bg-white'
+                  : 'text-gray-400 bg-gray-50 cursor-not-allowed'
+              }`}
+            >
+              <span className={`flex items-center justify-center w-6 h-6 rounded-full text-xs font-bold ${
+                activeTab === 'youth' ? 'bg-[#B8856A] text-white' : 'bg-gray-300 text-gray-600'
+              }`}>
+                2
+              </span>
+              YOUTH INFORMATION
             </div>
+          </div>
 
-            <div className="p-8 md:p-12 bg-cream-50">
-              <div className="mb-12">
-                <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                  We're so glad you're here!
-                </h2>
-                <p className="text-gray-600 leading-relaxed mb-4">
-                  We're so excited to get to know you and your family! This form helps us understand 
-                  how we can best support you. Whether you're a first-time visitor or have been with 
-                  us for a while, we'd love to hear from you.
-                </p>
-                <p className="text-gray-600 leading-relaxed">
-                  If you have any questions or need assistance, please don't hesitate to reach out 
-                  to us at{' '}
-                  <a href="mailto:info@youthfamilylife.org" className="text-coral-300 hover:underline">
-                    info@youthfamilylife.org
-                  </a>
-                </p>
-              </div>
+          {/* Logo Section */}
+          <div className="bg-gradient-to-b from-[#E8DDD5] to-[#F5F1ED] py-12 text-center">
+            <img
+              src="/hd-logo.png"
+              alt="Youth & Family Life"
+              className="h-80 w-auto mx-auto"
+            />
+          </div>
 
-              <form onSubmit={handleSubmit(onSubmit)} className="space-y-10">
-                <section>
-                  <div className="flex items-center mb-6">
-                    <div className="w-10 h-10 rounded-full bg-coral-200 text-white flex items-center justify-center font-bold mr-4">
-                      1
+          {/* Form Content Area */}
+          <div className="p-8 md:p-8 bg-[#F5F1ED]">
+            {activeTab === 'family' && (
+              <div className="max-w-4xl mx-auto space-y-4">
+                {/* Welcome Section */}
+                <div className="border-l-4 border-[#B8856A] border border-gray-200 rounded-lg p-8 bg-white/30">
+                  <h2 className="text-2xl font-semibold text-gray-800 mb-4">We're so glad you're here.</h2>
+                  <p className="text-gray-600 leading-relaxed mb-4">
+                    We are a collaborative spiritual community dedicated to the holistic wellbeing of youth and families. Rooted in love, we create transformational experiences — through nature, creativity, music, service, and universal spiritual principles we plant seeds that grow into forests of change.
+                  </p>
+                  <p className="text-gray-600 leading-relaxed mb-4">
+                    We co-create our conscious community by nurturing spiritual confidence, fostering deep connection, and honoring each soul's unique unfolding.
+                  </p>
+                  <div className="bg-[#E8F5E9] border border-[#A5D6A7] rounded-md p-4 flex items-start gap-3">
+                    <span className="text-[#4CAF50] text-xl">ℹ️</span>
+                    <p className="text-sm text-gray-700">
+                      Please fill this out once per family. You'll complete a short form for each child after this.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Family Details Section */}
+                <div className="rounded-lg p-8">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 bg-[#FFF3E0] rounded-lg flex items-center justify-center text-xl">
+                      🏠
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-800">Basic Details</h3>
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-800">Family Details</h3>
+                      <p className="text-sm text-gray-500">At Unity of Tustin we celebrate and honor the many expressions of family and welcome everyone with love and gratitude into our Youth and Family Life community.</p>
+                    </div>
                   </div>
 
-                  <div className="space-y-6 ml-14">
+                  <form className="space-y-6">
+                    {/* Parent/Guardian Name */}
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Parent/Guardian Name <span className="text-coral-300">*</span>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        PARENT / GUARDIAN NAME(S) <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
-                        {...register('parentName', { required: 'This field is required' })}
-                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors"
-                        placeholder="Your answer"
-                      />
-                      {errors.parentName && (
-                        <p className="text-coral-300 text-sm mt-1">{errors.parentName.message}</p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Parent/Guardian Phone Number
-                      </label>
-                      <input
-                        type="tel"
-                        {...register('parentPhone')}
-                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors"
-                        placeholder="Your answer"
+                        placeholder="Full name(s) of parent(s) / guardian(s)"
+                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B8856A] focus:border-transparent"
                       />
                     </div>
 
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Parent/Guardian Email <span className="text-coral-300">*</span>
-                      </label>
-                      <input
-                        type="email"
-                        {...register('parentEmail', { 
-                          required: 'This field is required',
-                          pattern: {
-                            value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                            message: 'Invalid email address'
-                          }
-                        })}
-                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors"
-                        placeholder="Your answer"
-                      />
-                      {errors.parentEmail && (
-                        <p className="text-coral-300 text-sm mt-1">{errors.parentEmail.message}</p>
-                      )}
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Emergency Contact Name & Number
-                      </label>
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <input
-                          type="text"
-                          {...register('emergencyContactName')}
-                          className="px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors"
-                          placeholder="Name"
-                        />
+                    {/* Phone and Email */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          PRIMARY PHONE NUMBER <span className="text-red-500">*</span>
+                        </label>
                         <input
                           type="tel"
-                          {...register('emergencyContactNumber')}
-                          className="px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors"
-                          placeholder="Phone Number"
+                          placeholder="( ) -"
+                          className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B8856A] focus:border-transparent"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          EMAIL ADDRESS <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          placeholder="your@email.com"
+                          className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B8856A] focus:border-transparent"
                         />
                       </div>
                     </div>
-                  </div>
-                </section>
 
-                <section>
-                  <div className="flex items-center mb-6">
-                    <div className="w-10 h-10 rounded-full bg-sage-200 text-white flex items-center justify-center font-bold mr-4">
-                      2
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-800">Getting to Know You</h3>
-                  </div>
-
-                  <div className="space-y-4 ml-14">
-                    <p className="text-gray-700 font-medium mb-4">
-                      Please select all that apply to your family:
-                    </p>
-
-                    <label className="flex items-start space-x-3 cursor-pointer group">
-                      <input
-                        type="checkbox"
-                        {...register('firstTimeVisitor')}
-                        className="mt-1 w-5 h-5 text-coral-300 border-2 border-gray-300 rounded focus:ring-coral-200"
-                      />
-                      <span className="text-gray-700 group-hover:text-gray-900">
-                        This is our first time visiting
-                      </span>
-                    </label>
-
-                    <label className="flex items-start space-x-3 cursor-pointer group">
-                      <input
-                        type="checkbox"
-                        {...register('attendingRegularly')}
-                        className="mt-1 w-5 h-5 text-coral-300 border-2 border-gray-300 rounded focus:ring-coral-200"
-                      />
-                      <span className="text-gray-700 group-hover:text-gray-900">
-                        We've been attending regularly
-                      </span>
-                    </label>
-
-                    <label className="flex items-start space-x-3 cursor-pointer group">
-                      <input
-                        type="checkbox"
-                        {...register('lookingForCommunity')}
-                        className="mt-1 w-5 h-5 text-coral-300 border-2 border-gray-300 rounded focus:ring-coral-200"
-                      />
-                      <span className="text-gray-700 group-hover:text-gray-900">
-                        We're looking for a faith community
-                      </span>
-                    </label>
-
-                    <label className="flex items-start space-x-3 cursor-pointer group">
-                      <input
-                        type="checkbox"
-                        {...register('exploringFaith')}
-                        className="mt-1 w-5 h-5 text-coral-300 border-2 border-gray-300 rounded focus:ring-coral-200"
-                      />
-                      <span className="text-gray-700 group-hover:text-gray-900">
-                        We're exploring our faith journey
-                      </span>
-                    </label>
-
-                    <label className="flex items-start space-x-3 cursor-pointer group">
-                      <input
-                        type="checkbox"
-                        {...register('friendInvited')}
-                        className="mt-1 w-5 h-5 text-coral-300 border-2 border-gray-300 rounded focus:ring-coral-200"
-                      />
-                      <span className="text-gray-700 group-hover:text-gray-900">
-                        A friend invited us
-                      </span>
-                    </label>
-                  </div>
-                </section>
-
-                <section>
-                  <div className="flex items-center mb-6">
-                    <div className="w-10 h-10 rounded-full bg-coral-200 text-white flex items-center justify-center font-bold mr-4">
-                      3
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-800">Medical & Agreements</h3>
-                  </div>
-
-                  <div className="space-y-6 ml-14">
+                    {/* Preferred Method of Contact */}
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Medical Conditions
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                        PREFERRED METHOD OF CONTACT
+                      </label>
+                      <div className="flex flex-wrap gap-4">
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input type="radio" name="contact" value="text" className="w-4 h-4 text-[#B8856A] focus:ring-[#B8856A]" />
+                          <span className="text-sm text-gray-700">📱 TEXT</span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input type="radio" name="contact" value="call" className="w-4 h-4 text-[#B8856A] focus:ring-[#B8856A]" />
+                          <span className="text-sm text-gray-700">📞 CALL</span>
+                        </label>
+                        <label className="flex items-center gap-2 cursor-pointer">
+                          <input type="radio" name="contact" value="email" className="w-4 h-4 text-[#B8856A] focus:ring-[#B8856A]" />
+                          <span className="text-sm text-gray-700">📧 EMAIL</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    {/* Emergency Contact */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        EMERGENCY CONTACT <span className="text-gray-400 text-xs">(if different from above)</span>
+                      </label>
+                      <input
+                        type="text"
+                        placeholder="Name and phone number"
+                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B8856A] focus:border-transparent"
+                      />
+                    </div>
+                  </form>
+                </div>
+
+                {/* Decorative Line Separator */}
+                <div className="h-px bg-gradient-to-r from-transparent via-[#D4A5A5] to-transparent my-4"></div>
+
+                {/* Getting to Know You Section */}
+                <div>
+                  {/* Decorative Line Separator */}
+                  <div className="h-px bg-gradient-to-r from-transparent via-[#D4A5A5] to-transparent mb-4"></div>
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 bg-[#E8F5E9] rounded-lg flex items-center justify-center text-xl">
+                      🌱
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-semibold text-gray-800">Getting to Know You</h3>
+                      <p className="text-sm text-gray-500">Help us understand how you found us and what you're looking for.</p>
+                    </div>
+                  </div>
+
+                  <form className="space-y-6">
+                    {/* How did you hear about us */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        HOW DID YOU HEAR ABOUT UNITY OF TUSTIN YOUTH & FAMILY LIFE? <span className="text-red-500">*</span>
+                      </label>
+                      <div className="relative">
+                        <select className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B8856A] focus:border-transparent appearance-none cursor-pointer">
+                          <option value="">Select one...</option>
+                          <option value="friend">Friend or Family Referral</option>
+                          <option value="website">Website</option>
+                          <option value="social">Social Media</option>
+                          <option value="sunday">Sunday Service</option>
+                          <option value="event">Event or Workshop</option>
+                          <option value="flyer">Flyer or Poster</option>
+                          <option value="search">Online Search</option>
+                          <option value="other">Other</option>
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                          <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* What brings you to our community */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-3">
+                        WHAT BRINGS YOU TO OUR COMMUNITY? WHAT ARE YOU SEEKING?
+                      </label>
+                      <div className="flex flex-wrap gap-3">
+                        <label className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-full cursor-pointer hover:bg-[#E8DDD5] hover:border-[#B8856A] has-[:checked]:bg-[#D4C4B8] has-[:checked]:border-[#B8856A] has-[:checked]:shadow-md transition-all">
+                          <input type="checkbox" className="hidden" />
+                          <span className="text-sm">✨ SPIRITUAL GROWTH / CONNECTION</span>
+                        </label>
+                        <label className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-full cursor-pointer hover:bg-[#E8DDD5] hover:border-[#B8856A] has-[:checked]:bg-[#D4C4B8] has-[:checked]:border-[#B8856A] has-[:checked]:shadow-md transition-all">
+                          <input type="checkbox" className="hidden" />
+                          <span className="text-sm">🧡 COMMUNITY / BELONGING</span>
+                        </label>
+                        <label className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-full cursor-pointer hover:bg-[#E8DDD5] hover:border-[#B8856A] has-[:checked]:bg-[#D4C4B8] has-[:checked]:border-[#B8856A] has-[:checked]:shadow-md transition-all">
+                          <input type="checkbox" className="hidden" />
+                          <span className="text-sm">🌿 YOUTH PROGRAMS</span>
+                        </label>
+                        <label className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-full cursor-pointer hover:bg-[#E8DDD5] hover:border-[#B8856A] has-[:checked]:bg-[#D4C4B8] has-[:checked]:border-[#B8856A] has-[:checked]:shadow-md transition-all">
+                          <input type="checkbox" className="hidden" />
+                          <span className="text-sm">🔥 YOUNG ADULT CONNECTION (NGU)</span>
+                        </label>
+                        <label className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-full cursor-pointer hover:bg-[#E8DDD5] hover:border-[#B8856A] has-[:checked]:bg-[#D4C4B8] has-[:checked]:border-[#B8856A] has-[:checked]:shadow-md transition-all">
+                          <input type="checkbox" className="hidden" />
+                          <span className="text-sm">🧡 PERSONAL HEALING OR SUPPORT</span>
+                        </label>
+                        <label className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-full cursor-pointer hover:bg-[#E8DDD5] hover:border-[#B8856A] has-[:checked]:bg-[#D4C4B8] has-[:checked]:border-[#B8856A] has-[:checked]:shadow-md transition-all">
+                          <input type="checkbox" className="hidden" />
+                          <span className="text-sm">🔵 CURIOSITY / EXPLORING</span>
+                        </label>
+                        <label className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-full cursor-pointer hover:bg-[#E8DDD5] hover:border-[#B8856A] has-[:checked]:bg-[#D4C4B8] has-[:checked]:border-[#B8856A] has-[:checked]:shadow-md transition-all">
+                          <input type="checkbox" className="hidden" />
+                          <span className="text-sm">🎉 EVENTS OR SOCIAL CONNECTION</span>
+                        </label>
+                        <label className="inline-flex items-center gap-2 px-4 py-2 bg-white border border-gray-300 rounded-full cursor-pointer hover:bg-[#E8DDD5] hover:border-[#B8856A] has-[:checked]:bg-[#D4C4B8] has-[:checked]:border-[#B8856A] has-[:checked]:shadow-md transition-all">
+                          <input type="checkbox" className="hidden" />
+                          <span className="text-sm">OTHER</span>
+                        </label>
+                      </div>
+                    </div>
+
+                    {/* Additional information */}
+                    <div>
+                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                        ANYTHING ELSE YOU'D LIKE US TO KNOW ABOUT YOUR FAMILY?
                       </label>
                       <textarea
-                        {...register('medicalConditions')}
-                        rows={3}
-                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors resize-none"
-                        placeholder="Please list any medical conditions we should be aware of"
+                        rows={4}
+                        placeholder="Share anything that would help us welcome and support your family well..."
+                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B8856A] focus:border-transparent resize-none"
                       />
                     </div>
+                  </form>
+                </div>
 
+                {/* Decorative Line Separator */}
+                <div className="h-px bg-gradient-to-r from-transparent via-[#D4A5A5] to-transparent my-4"></div>
+
+                {/* Release & Agreements Section */}
+                <div className="border-l-4 border-[#B8856A] border border-gray-200 rounded-lg p-8 bg-white/30">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="w-10 h-10 bg-[#F3E5F5] rounded-lg flex items-center justify-center text-xl">
+                      📝
+                    </div>
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Allergies
-                      </label>
-                      <textarea
-                        {...register('allergies')}
-                        rows={3}
-                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors resize-none"
-                        placeholder="Please list any allergies"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="block text-sm font-semibold text-gray-700 mb-2">
-                        Current Medications
-                      </label>
-                      <textarea
-                        {...register('medications')}
-                        rows={3}
-                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors resize-none"
-                        placeholder="Please list any current medications"
-                      />
-                    </div>
-
-                    <div className="space-y-4 pt-4">
-                      <label className="flex items-start space-x-3 cursor-pointer group">
-                        <input
-                          type="checkbox"
-                          {...register('liabilityConsent', { required: 'You must agree to continue' })}
-                          className="mt-1 w-5 h-5 text-coral-300 border-2 border-gray-300 rounded focus:ring-coral-200"
-                        />
-                        <span className="text-gray-700 group-hover:text-gray-900">
-                          I agree to the liability waiver and medical release <span className="text-coral-300">*</span>
-                        </span>
-                      </label>
-                      {errors.liabilityConsent && (
-                        <p className="text-coral-300 text-sm ml-8">{errors.liabilityConsent.message}</p>
-                      )}
-
-                      <label className="flex items-start space-x-3 cursor-pointer group">
-                        <input
-                          type="checkbox"
-                          {...register('photoConsent')}
-                          className="mt-1 w-5 h-5 text-coral-300 border-2 border-gray-300 rounded focus:ring-coral-200"
-                        />
-                        <span className="text-gray-700 group-hover:text-gray-900">
-                          I consent to photos/videos being taken for promotional purposes
-                        </span>
-                      </label>
-
-                      <label className="flex items-start space-x-3 cursor-pointer group">
-                        <input
-                          type="checkbox"
-                          {...register('communicationConsent')}
-                          className="mt-1 w-5 h-5 text-coral-300 border-2 border-gray-300 rounded focus:ring-coral-200"
-                        />
-                        <span className="text-gray-700 group-hover:text-gray-900">
-                          I'd like to receive updates and communications from Youth & Family Life
-                        </span>
-                      </label>
+                      <h3 className="text-xl font-semibold text-gray-800">Release & Agreements</h3>
+                      <p className="text-sm text-gray-500">Please read both sections carefully before signing below.</p>
                     </div>
                   </div>
-                </section>
 
-                <div className="bg-cream-100 rounded-2xl p-8 text-center border border-gray-200">
-                  <div className="flex items-center justify-center mb-4">
-                    <Sparkles className="w-6 h-6 text-coral-300 mr-2" />
-                    <h3 className="text-2xl font-bold text-gray-800">Almost There!</h3>
-                    <Sparkles className="w-6 h-6 text-coral-300 ml-2" />
-                  </div>
-                  <p className="text-gray-600 mb-6">
-                    Thank you for taking the time to fill out this form. We're excited to connect with you!
+                  <form className="space-y-6">
+                    {/* Liability & Photography Release Box */}
+                    <div className="bg-[#FFF8F0] border border-[#E8DDD5] rounded-lg p-6">
+                      <div className="flex items-center gap-3 mb-4">
+                        <div className="w-8 h-8 bg-[#FFE0B2] rounded-lg flex items-center justify-center text-lg">
+                          📋
+                        </div>
+                        <div>
+                          <h4 className="font-semibold text-gray-800">Liability & Photography Release</h4>
+                          <p className="text-xs text-gray-500">Scroll to read the full document before agreeing</p>
+                        </div>
+                      </div>
+
+                      {/* Scrollable Release Text */}
+                      <div className="bg-white border border-gray-300 rounded-md p-4 max-h-64 overflow-y-auto mb-4">
+                        <h5 className="text-sm font-semibold text-[#D89580] mb-3">LIABILITY RELEASE</h5>
+                        <p className="text-sm text-gray-700 leading-relaxed mb-4">
+                          As the above-named participant (or legal guardian if participant is under age 18), I confirm that I am participating in these events of my own free will and have the appropriate permission to participate in and travel to/from these events.
+                        </p>
+                        <p className="text-sm text-gray-700 leading-relaxed mb-4">
+                          I confirm that I agree to all terms outlined in this release document, including indemnifying and holding harmless the group leaders, or any other representative of Unity of Tustin, or Unity of Tustin itself, or the Southwest Region of the Association of Unity Churches from all liability arising from participation in or attendance at this function.
+                        </p>
+                        <div className="bg-gray-50 border-l-2 border-gray-300 pl-4 py-2 my-4">
+                          <p className="text-xs italic text-gray-600">
+                            ↑ Scroll up to read the full document before agreeing below.
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Consent Checkboxes */}
+                      <div className="space-y-4">
+                        <label className="flex items-start gap-3 cursor-pointer group">
+                          <input 
+                            type="checkbox" 
+                            className="mt-1 w-5 h-5 text-[#B8856A] border-gray-300 rounded focus:ring-[#B8856A]"
+                          />
+                          <div>
+                            <p className="font-semibold text-gray-800 group-hover:text-gray-900">I agree to the Liability Release</p>
+                            <p className="text-sm text-gray-600 mt-1">
+                              I confirm I am participating of my own free will and agree to hold harmless Unity of Tustin and the Southwest Region of the Association of Unity Churches from all liability arising from participation in these events.
+                            </p>
+                          </div>
+                        </label>
+
+                        <label className="flex items-start gap-3 cursor-pointer group">
+                          <input 
+                            type="checkbox" 
+                            className="mt-1 w-5 h-5 text-[#B8856A] border-gray-300 rounded focus:ring-[#B8856A]"
+                          />
+                          <div>
+                            <p className="font-semibold text-gray-800 group-hover:text-gray-900">I agree to the Photography Release</p>
+                            <p className="text-sm text-gray-600 mt-1">
+                              I grant Unity of Tustin permission to use photographs and video images of the above participant for publication, social media, advertising, and presentations. I will not use these images for personal gain.
+                            </p>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+
+                    {/* Signature Fields */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          PARENT / GUARDIAN SIGNATURE <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Type full legal name to sign"
+                          className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B8856A] focus:border-transparent"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-sm font-medium text-gray-700 mb-2">
+                          DATE SIGNED <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="date"
+                          defaultValue="2026-04-06"
+                          className="w-full px-4 py-3 bg-white border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#B8856A] focus:border-transparent"
+                        />
+                      </div>
+                    </div>
+                  </form>
+                </div>
+
+                {/* Decorative Line Separator */}
+                <div className="h-px bg-gradient-to-r from-transparent via-[#D4A5A5] to-transparent my-4"></div>
+
+                {/* Almost There Section */}
+                <div className="border-l-4 border-[#B8856A] border border-gray-200 rounded-lg p-8 bg-white/30 text-center">
+                  <h3 className="text-2xl font-semibold text-gray-800 mb-4 flex items-center justify-center gap-2">
+                    Almost there! ✨
+                  </h3>
+                  <p className="text-gray-600 leading-relaxed mb-6 max-w-2xl mx-auto">
+                    Thank you for providing your family information. The next step is to register each child and/or teen individually so we can best support them. Please fill out a Youth Information Form for each young person attending.
                   </p>
                   <button
-                    type="submit"
-                    className="px-8 py-4 bg-coral-300 text-white font-bold rounded-full hover:bg-coral-200 transition-all transform hover:scale-105 shadow-lg"
+                    onClick={() => setActiveTab('youth')}
+                    className="px-8 py-3 bg-[#D89580] text-white font-semibold rounded-full hover:bg-[#C67F6B] transition-all shadow-md hover:shadow-lg"
                   >
-                    SUBMIT REGISTRATION
+                    CONTINUE TO YOUTH FORM →
                   </button>
                 </div>
-              </form>
-            </div>
+              </div>
+            )}
+            {activeTab === 'youth' && (
+              <div className="max-w-4xl mx-auto space-y-6">
+                <div className="border-l-4 border-[#B8856A] border border-gray-200 rounded-lg p-8 bg-white/30 text-center">
+                  <h3 className="text-2xl font-semibold text-gray-800 mb-4">Youth Information</h3>
+                  <p className="text-gray-600">Youth form content will be added here...</p>
+                </div>
+              </div>
+            )}
           </div>
-        </motion.div>
+        </div>
       </div>
     </div>
   )
