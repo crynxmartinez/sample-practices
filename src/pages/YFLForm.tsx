@@ -38,7 +38,7 @@ export default function YFLForm() {
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
-          className="bg-white rounded-2xl shadow-xl p-12 max-w-2xl text-center"
+          className="bg-cream-50 rounded-2xl shadow-xl p-12 max-w-2xl text-center border border-gray-200"
         >
           <div className="w-20 h-20 bg-coral-100 rounded-full flex items-center justify-center mx-auto mb-6">
             <Sparkles className="w-10 h-10 text-coral-300" />
@@ -49,7 +49,7 @@ export default function YFLForm() {
           </p>
           <Link
             to="/"
-            className="inline-flex items-center px-6 py-3 bg-coral-200 text-white rounded-full hover:bg-coral-300 transition-colors"
+            className="inline-flex items-center px-6 py-3 bg-coral-300 text-white rounded-full hover:bg-coral-200 transition-colors"
           >
             <ArrowLeft className="w-5 h-5 mr-2" />
             Back to Dashboard
@@ -60,7 +60,7 @@ export default function YFLForm() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-cream-100 to-sage-100 py-12 px-4">
+    <div className="min-h-screen bg-cream-100 py-12 px-4">
       <div className="max-w-3xl mx-auto">
         <Link
           to="/"
@@ -75,25 +75,16 @@ export default function YFLForm() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
         >
-          <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
-            <div className="bg-gradient-to-r from-coral-100 to-sage-100 p-12 text-center">
+          <div className="bg-cream-50 rounded-3xl shadow-lg overflow-hidden border border-gray-200">
+            <div className="bg-cream-50 py-12 text-center">
               <img
                 src="/hd-logo.png"
                 alt="Youth & Family Life"
-                className="h-32 mx-auto mb-6"
+                className="h-40 mx-auto"
               />
-              <h1 className="text-4xl font-bold text-gray-800 mb-2">
-                Youth & Family Life
-              </h1>
-              <p className="text-lg text-gray-600">UNITY of TUSTIN</p>
-              <div className="flex items-center justify-center mt-4 text-coral-300">
-                <Sparkles className="w-5 h-5 mr-2" />
-                <span className="font-semibold">Rooted in Love. Growing in Connection.</span>
-                <Sparkles className="w-5 h-5 ml-2" />
-              </div>
             </div>
 
-            <div className="p-8 md:p-12">
+            <div className="p-8 md:p-12 bg-cream-50">
               <div className="mb-12">
                 <h2 className="text-3xl font-bold text-gray-800 mb-4">
                   We're so glad you're here!
@@ -129,7 +120,7 @@ export default function YFLForm() {
                       <input
                         type="text"
                         {...register('parentName', { required: 'This field is required' })}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-coral-200 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors"
                         placeholder="Your answer"
                       />
                       {errors.parentName && (
@@ -144,7 +135,7 @@ export default function YFLForm() {
                       <input
                         type="tel"
                         {...register('parentPhone')}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-coral-200 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors"
                         placeholder="Your answer"
                       />
                     </div>
@@ -162,7 +153,7 @@ export default function YFLForm() {
                             message: 'Invalid email address'
                           }
                         })}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-coral-200 focus:outline-none transition-colors"
+                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors"
                         placeholder="Your answer"
                       />
                       {errors.parentEmail && (
@@ -178,13 +169,13 @@ export default function YFLForm() {
                         <input
                           type="text"
                           {...register('emergencyContactName')}
-                          className="px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-coral-200 focus:outline-none transition-colors"
+                          className="px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors"
                           placeholder="Name"
                         />
                         <input
                           type="tel"
                           {...register('emergencyContactNumber')}
-                          className="px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-coral-200 focus:outline-none transition-colors"
+                          className="px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors"
                           placeholder="Phone Number"
                         />
                       </div>
@@ -278,7 +269,7 @@ export default function YFLForm() {
                       <textarea
                         {...register('medicalConditions')}
                         rows={3}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-coral-200 focus:outline-none transition-colors resize-none"
+                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors resize-none"
                         placeholder="Please list any medical conditions we should be aware of"
                       />
                     </div>
@@ -290,7 +281,7 @@ export default function YFLForm() {
                       <textarea
                         {...register('allergies')}
                         rows={3}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-coral-200 focus:outline-none transition-colors resize-none"
+                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors resize-none"
                         placeholder="Please list any allergies"
                       />
                     </div>
@@ -302,7 +293,7 @@ export default function YFLForm() {
                       <textarea
                         {...register('medications')}
                         rows={3}
-                        className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:border-coral-200 focus:outline-none transition-colors resize-none"
+                        className="w-full px-4 py-3 bg-white border border-gray-300 rounded-lg focus:border-coral-200 focus:outline-none transition-colors resize-none"
                         placeholder="Please list any current medications"
                       />
                     </div>
@@ -347,7 +338,7 @@ export default function YFLForm() {
                   </div>
                 </section>
 
-                <div className="bg-gradient-to-r from-coral-100 to-sage-100 rounded-2xl p-8 text-center">
+                <div className="bg-cream-100 rounded-2xl p-8 text-center border border-gray-200">
                   <div className="flex items-center justify-center mb-4">
                     <Sparkles className="w-6 h-6 text-coral-300 mr-2" />
                     <h3 className="text-2xl font-bold text-gray-800">Almost There!</h3>

@@ -15,7 +15,7 @@ const demos = [
 
 export default function Dashboard() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-cream-50 via-cream-100 to-sage-100">
+    <div className="min-h-screen bg-cream-100">
       <div className="container mx-auto px-4 py-16">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
@@ -24,11 +24,11 @@ export default function Dashboard() {
           className="text-center mb-16"
         >
           <div className="flex items-center justify-center mb-4">
-            <Sparkles className="w-8 h-8 text-coral-200 mr-2" />
+            <Sparkles className="w-8 h-8 text-coral-300 mr-2" />
             <h1 className="text-5xl font-bold text-gray-800">
               Sample Practices
             </h1>
-            <Sparkles className="w-8 h-8 text-coral-200 ml-2" />
+            <Sparkles className="w-8 h-8 text-coral-300 ml-2" />
           </div>
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
             A collection of demo projects and practice implementations
@@ -46,7 +46,7 @@ export default function Dashboard() {
                 transition={{ duration: 0.5, delay: index * 0.1 }}
               >
                 <Link to={demo.path}>
-                  <div className="bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 h-full border-2 border-transparent hover:border-coral-200 group">
+                  <div className="bg-cream-50 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 p-8 h-full border border-gray-200 hover:border-coral-200 group">
                     <div className="flex items-center justify-center w-16 h-16 rounded-full bg-coral-100 mb-6 group-hover:bg-coral-200 transition-colors">
                       <Icon className="w-8 h-8 text-coral-300" />
                     </div>
